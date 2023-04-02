@@ -4,6 +4,8 @@
 #include "problemGenerator.h"
 #include "solution_t.h"
 
+//std::random_device rd;
+//std::mt19937 rgen(rd());
 std::mt19937 rgen(1234567890);
 
 using namespace mhe;
@@ -66,16 +68,22 @@ void partition(std::vector<int> const &S) {
 
 int main() {
 
-//    std::vector<int> problem = mhe::generateProblem(7, 1, 9, rgen);
-//    std::cout << problem << std::endl;
+    std::vector<int> problem = mhe::generateProblem(30, 1, 100, rgen);
+    std::cout << problem << " sum: " <<std::accumulate(problem.begin(), problem.end(), 0) << std::endl;
+//    for(int i=0 ; i< 10 ; i++){
+//        std::cout << problem << std::accumulate(problem.begin(), problem.end(), 0) << std::endl;
+//        partition(problem);
+//        std::vector<int> problem = mhe::generateProblem(15, 1, 10, rgen);
+//    }
+
 //    std::vector<int> S = {7, 3, 2, 1, 5, 4, 8};
-    solution_t solution;
-    solution.goal_sum = 10;
-    solution.problem = {1, 2, 3, 4};
-    solution.subsetA = {1};
-    solution.subsetB = {2, 3};
-    solution.subsetC = {4};
-    std::cout << solution.goal() << std::endl;
+//    solution_t solution;
+//    solution.goal_sum = 5;
+//    solution.problem = {1, 2, 3, 4, 5};
+//    solution.subsetA = {1, 4};
+//    solution.subsetB = {2, 3};
+//    solution.subsetC = {5};
+//    std::cout << solution.goal() << std::endl;
 
 //    partition(problem);
 

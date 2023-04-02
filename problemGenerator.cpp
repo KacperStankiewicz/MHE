@@ -4,20 +4,31 @@
 
 #include "problemGenerator.h"
 #include <random>
+#include <algorithm>
 
 namespace mhe {
+
     std::vector<int> generateProblem(int length, int min, int max, std::mt19937 &rgen) {
-        //todo:: zmiana generowania, aby zbiory byly mozliwe do podzialu
-        //vec[n - 1] = (3 - (sum % 3)) % 3;
-        std::uniform_int_distribution<int> distr(min, max);
-        std::vector<int> result;
+        using namespace std;
+        uniform_int_distribution<int> distr(min, max);
+        vector<int> result;
         for (int i = 0; i < length; i++) {
             result.push_back(distr(rgen));
         }
+        mhe::adjustVectorToBeDivisibleBy3(result);
         return result;
     }
 
-    std::ostream &operator<<(std::ostream &o, const std::vector<int> v){
+    void adjustVectorToBeDivisibleBy3(std::vector<int> &vec) {
+        int sum = accumulate(vec.begin(), vec.end(), 0);
+        int remainder = sum % 3;
+        int delta = (3 - remainder) % 3;
+        if (delta != 0) {
+            vec.back() += delta;
+        }
+    }
+
+    std::ostream &operator<<(std::ostream &o, const std::vector<int> v) {
         o << "{ ";
         for (auto e: v)
             o << e << " ";
