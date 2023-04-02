@@ -3,4 +3,4 @@ project(projekt)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(projekt main.cpp problemGenerator.cpp problemGenerator.h solution_t.cpp solution_t.h)
+add_executable(projekt main.cpp solution_t.cpp solution_t.h hillClimb.cpp hillClimb.h utils.cpp utils.h problem_t.cpp problem_t.h)

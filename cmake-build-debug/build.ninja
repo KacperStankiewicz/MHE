@@ -55,14 +55,26 @@ build CMakeFiles/projekt.dir/main.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studi
   OBJECT_DIR = CMakeFiles\projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\projekt.dir
 
-build CMakeFiles/projekt.dir/problemGenerator.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studia/MHE/projekt/problemGenerator.cpp || cmake_object_order_depends_target_projekt
-  DEP_FILE = CMakeFiles\projekt.dir\problemGenerator.cpp.obj.d
+build CMakeFiles/projekt.dir/solution_t.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studia/MHE/projekt/solution_t.cpp || cmake_object_order_depends_target_projekt
+  DEP_FILE = CMakeFiles\projekt.dir\solution_t.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\projekt.dir
 
-build CMakeFiles/projekt.dir/solution_t.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studia/MHE/projekt/solution_t.cpp || cmake_object_order_depends_target_projekt
-  DEP_FILE = CMakeFiles\projekt.dir\solution_t.cpp.obj.d
+build CMakeFiles/projekt.dir/hillClimb.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studia/MHE/projekt/hillClimb.cpp || cmake_object_order_depends_target_projekt
+  DEP_FILE = CMakeFiles\projekt.dir\hillClimb.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\projekt.dir
+  OBJECT_FILE_DIR = CMakeFiles\projekt.dir
+
+build CMakeFiles/projekt.dir/utils.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studia/MHE/projekt/utils.cpp || cmake_object_order_depends_target_projekt
+  DEP_FILE = CMakeFiles\projekt.dir\utils.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\projekt.dir
+  OBJECT_FILE_DIR = CMakeFiles\projekt.dir
+
+build CMakeFiles/projekt.dir/problem_t.cpp.obj: CXX_COMPILER__projekt_Debug D$:/Studia/MHE/projekt/problem_t.cpp || cmake_object_order_depends_target_projekt
+  DEP_FILE = CMakeFiles\projekt.dir\problem_t.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\projekt.dir
@@ -75,7 +87,7 @@ build CMakeFiles/projekt.dir/solution_t.cpp.obj: CXX_COMPILER__projekt_Debug D$:
 #############################################
 # Link the executable projekt.exe
 
-build projekt.exe: CXX_EXECUTABLE_LINKER__projekt_Debug CMakeFiles/projekt.dir/main.cpp.obj CMakeFiles/projekt.dir/problemGenerator.cpp.obj CMakeFiles/projekt.dir/solution_t.cpp.obj
+build projekt.exe: CXX_EXECUTABLE_LINKER__projekt_Debug CMakeFiles/projekt.dir/main.cpp.obj CMakeFiles/projekt.dir/solution_t.cpp.obj CMakeFiles/projekt.dir/hillClimb.cpp.obj CMakeFiles/projekt.dir/utils.cpp.obj CMakeFiles/projekt.dir/problem_t.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\projekt.dir
