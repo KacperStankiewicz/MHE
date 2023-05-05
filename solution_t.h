@@ -12,7 +12,7 @@
 
 namespace mhe {
 
-    class solution_t {
+    class solution_t : public std::array<std::vector<int>, 3> {
     public:
         std::shared_ptr<problem_t> problem;
         int goal_sum;
@@ -20,6 +20,8 @@ namespace mhe {
         static solution_t forProblem(problem_t problem_);
 
         int goal() const;
+
+        solution_t randomModify(std::mt19937 &rgen) const;
     };
 
     std::ostream &operator<<(std::ostream &o, mhe::solution_t s);

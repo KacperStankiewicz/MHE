@@ -4,11 +4,12 @@
 #include "solution_t.h"
 #include "hillClimb.h"
 
-//std::random_device rd;
-//std::mt19937 rgen(rd());
-std::mt19937 rgen(1234567890);
+std::random_device rd;
+std::mt19937 rgen(rd());
+//std::mt19937 rgen(1234567890);
 
 using namespace mhe;
+
 //todo: refactor this to use solution_t type
 bool doesSubsetExist(std::vector<int> const &S, int n, int a, int b, int c, std::vector<int> &arr) {
     if (a == 0 && b == 0 && c == 0) {
@@ -77,10 +78,17 @@ int main() {
 //    }
 
 //    std::vector<int> S = {7, 3, 2, 1, 5, 4, 8};
-    problem_t problem = generateProblem(5, 1, 10, rgen);
-    problem.at(0) = {1,2};
-    problem.at(1) = {3,4};
-    problem.at(2) = {5};
+    problem_t problem = generateProblem(100, 1, 100, rgen);
+//    std::vector<int> S;
+//    for (int i = 0; i < 3; ++i) {
+//        for (int j = 0; j < problem.at(i).size(); j++){
+//            S.push_back(problem[i][j]);
+//        }
+//    }
+
+//    problem.at(0) = {1, 2};
+//    problem.at(1) = {3, 4};
+//    problem.at(2) = {5};
 
     solution_t solution = solution_t::forProblem(problem);
     cout << solution << endl;

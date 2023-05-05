@@ -12,6 +12,7 @@
 namespace mhe {
 
     solution_t randomHillClimb(const solution_t solution, int numOfIterations, std::mt19937 &rgen);
+
     solution_t randomModify(solution_t solution, std::mt19937 &rgen);
 
 } // mhe
