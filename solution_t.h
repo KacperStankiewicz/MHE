@@ -6,19 +6,25 @@
 #define PROJEKT_SOLUTION_T_H
 
 #include <vector>
+#include <memory>
+#include "utils.h"
+#include "problem_t.h"
 
 namespace mhe {
 
-    class solution_t {
+    class solution_t : public std::array<std::vector<int>, 3> {
     public:
-        std::vector<int> problem;
+        std::shared_ptr<problem_t> problem;
         int goal_sum;
-        std::vector<int> subsetA;
-        std::vector<int> subsetB;
-        std::vector<int> subsetC;
+
+        static solution_t forProblem(problem_t problem_);
 
         int goal() const;
+
+        solution_t randomModify(std::mt19937 &rgen) const;
     };
+
+    std::ostream &operator<<(std::ostream &o, mhe::solution_t s);
 
 } // mhe
 

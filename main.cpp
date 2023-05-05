@@ -1,15 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
-#include "problemGenerator.h"
 #include "solution_t.h"
+#include "hillClimb.h"
 
-//std::random_device rd;
-//std::mt19937 rgen(rd());
-std::mt19937 rgen(1234567890);
+std::random_device rd;
+std::mt19937 rgen(rd());
+//std::mt19937 rgen(1234567890);
 
 using namespace mhe;
 
+//todo: refactor this to use solution_t type
 bool doesSubsetExist(std::vector<int> const &S, int n, int a, int b, int c, std::vector<int> &arr) {
     if (a == 0 && b == 0 && c == 0) {
         return true;
@@ -67,9 +68,9 @@ void partition(std::vector<int> const &S) {
 }
 
 int main() {
-
-    std::vector<int> problem = mhe::generateProblem(30, 1, 100, rgen);
-    std::cout << problem << " sum: " <<std::accumulate(problem.begin(), problem.end(), 0) << std::endl;
+    using namespace std;
+//    std::vector<int> problem = mhe::generateProblem(30, 1, 100, rgen);
+//    std::cout << problem << " sum: " <<std::accumulate(problem.begin(), problem.end(), 0) << std::endl;
 //    for(int i=0 ; i< 10 ; i++){
 //        std::cout << problem << std::accumulate(problem.begin(), problem.end(), 0) << std::endl;
 //        partition(problem);
@@ -77,15 +78,30 @@ int main() {
 //    }
 
 //    std::vector<int> S = {7, 3, 2, 1, 5, 4, 8};
-//    solution_t solution;
-//    solution.goal_sum = 5;
-//    solution.problem = {1, 2, 3, 4, 5};
-//    solution.subsetA = {1, 4};
-//    solution.subsetB = {2, 3};
-//    solution.subsetC = {5};
-//    std::cout << solution.goal() << std::endl;
+    problem_t problem = generateProblem(100, 1, 100, rgen);
+//    std::vector<int> S;
+//    for (int i = 0; i < 3; ++i) {
+//        for (int j = 0; j < problem.at(i).size(); j++){
+//            S.push_back(problem[i][j]);
+//        }
+//    }
 
-//    partition(problem);
+//    problem.at(0) = {1, 2};
+//    problem.at(1) = {3, 4};
+//    problem.at(2) = {5};
+
+    solution_t solution = solution_t::forProblem(problem);
+    cout << solution << endl;
+    solution_t hillClimbSolution = randomHillClimb(solution, 100, rgen);
+
+//    cout << solution.goal_sum;
+//    solution.goal_sum = 5;
+//    solution.problem->at(0) = {2, 3};
+//    solution.problem->at(1) = {4, 1};
+//    solution.problem->at(2) = {5, -15};
+//    std::cout << solution << std::endl;
+
+//    partition(vector<int>{1,2,3,4,5});
 
     return 0;
 }

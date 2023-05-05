@@ -1,3 +1,0 @@
-D:/Studia/MHE/projekt/cmake-build-debug/CMakeFiles/projekt.dir
-D:/Studia/MHE/projekt/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Studia/MHE/projekt/cmake-build-debug/CMakeFiles/rebuild_cache.dir
