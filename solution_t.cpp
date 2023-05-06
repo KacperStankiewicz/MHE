@@ -61,7 +61,7 @@ namespace mhe {
         solution_t currentSolution = *this;
         std::vector<solution_t> neighbours;
         for (int i = 0; i < currentSolution.size(); i++) { // size = 3
-            for (int j = 0; j < currentSolution[i].size(); j++) { // size podzbioru
+            for (int j = 0; j < currentSolution[i].size(); j++) { // size of subset
                 solution_t neighbour = currentSolution;
                 neighbour[(i + 1) % 3].push_back(neighbour[i][j]);
                 neighbour[i].erase(neighbour[i].begin() + j);
