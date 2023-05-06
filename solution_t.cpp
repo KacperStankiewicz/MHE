@@ -39,22 +39,50 @@ namespace mhe {
         int from = distr(rgen);
         int to = distr(rgen);
 
-        solution_t solution = *this;
+        solution_t currentSolution = *this;
         while (from == to) {
             to = distr(rgen);
         }
 
-        while (solution.at(from).empty()) {
+        while (currentSolution.at(from).empty()) {
             from = distr(rgen);
         }
 
-        distr = std::uniform_int_distribution<int>(0, solution.at(from).size() - 1);
+        distr = std::uniform_int_distribution<int>(0, currentSolution.at(from).size() - 1);
         int a = distr(rgen);
 
-        solution.at(to).push_back(solution.at(from)[a]);
-        solution.at(from).erase(solution.at(from).begin() + a);
+        currentSolution.at(to).push_back(currentSolution.at(from)[a]);
+        currentSolution.at(from).erase(currentSolution.at(from).begin() + a);
 
-        return solution;
+        return currentSolution;
+    }
+
+    std::vector<solution_t> solution_t::findNeighbours() const {
+        solution_t currentSolution = *this;
+        std::vector<solution_t> neighbours;
+        for (int i = 0; i < currentSolution.size(); i++) { // size = 3
+            for (int j = 0; j < currentSolution[i].size(); j++) { // size podzbioru
+                solution_t neighbour = currentSolution;
+                neighbour[(i + 1) % 3].push_back(neighbour[i][j]);
+                neighbour[i].erase(neighbour[i].begin() + j);
+                neighbours.push_back(neighbour);
+            }
+        }
+        return neighbours;
+    }
+
+    solution_t solution_t::bestNeighbour() const {
+        solution_t solution = *this;
+        std::vector<solution_t> neighbours = solution.findNeighbours();
+        solution_t best = neighbours[0];
+
+        for (auto x: neighbours) {
+            if (x.goal() < best.goal()) {
+                best = x;
+            }
+        }
+
+        return best;
     }
 
     std::ostream &operator<<(std::ostream &o, const mhe::solution_t s) {

@@ -78,7 +78,7 @@ int main() {
 //    }
 
 //    std::vector<int> S = {7, 3, 2, 1, 5, 4, 8};
-    problem_t problem = generateProblem(100, 1, 100, rgen);
+        problem_t problem = generateProblem(100, 1, 100, rgen);
 //    std::vector<int> S;
 //    for (int i = 0; i < 3; ++i) {
 //        for (int j = 0; j < problem.at(i).size(); j++){
@@ -91,8 +91,15 @@ int main() {
 //    problem.at(2) = {5};
 
     solution_t solution = solution_t::forProblem(problem);
-    cout << solution << endl;
-    solution_t hillClimbSolution = randomHillClimb(solution, 100, rgen);
+    solution_t solution2 = solution_t::forProblem(problem);
+    cout << "solution 1: \n" << solution << endl;
+    cout << "solution 2: \n" << solution2 << endl;
+    solution_t randomHillClimbSolution = randomHillClimb(solution, 100, rgen);
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    solution_t deterministicHillClimbSolution = deterministicHillClimb(solution, 100);
+
+    cout << "solution random: \n" << randomHillClimbSolution << endl;
+    cout << "solution deterministic: \n" << deterministicHillClimbSolution << endl;
 
 //    cout << solution.goal_sum;
 //    solution.goal_sum = 5;
