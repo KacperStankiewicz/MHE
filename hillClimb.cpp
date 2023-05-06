@@ -18,4 +18,16 @@ namespace mhe {
         }
         return solution;
     }
+
+    solution_t deterministicHillClimb(solution_t solution, int numOfIterations){
+        for (int i = 0; i < numOfIterations; i++) {
+            auto newSolution = solution.bestNeighbour();
+
+            if (newSolution.goal() <= solution.goal()) {
+                solution = newSolution;
+                std::cout << "iteration: " << i << std::endl << solution;
+            }
+        }
+        return solution;
+    }
 } // mhe

@@ -22,6 +22,10 @@ namespace mhe {
         int goal() const;
 
         solution_t randomModify(std::mt19937 &rgen) const;
+
+        solution_t bestNeighbour() const;
+
+        std::vector<solution_t> findNeighbours() const;
     };
 
     std::ostream &operator<<(std::ostream &o, mhe::solution_t s);
