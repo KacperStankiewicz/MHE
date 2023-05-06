@@ -3,10 +3,11 @@
 #include <numeric>
 #include "solution_t.h"
 #include "hillClimb.h"
+#include "tabuSearch.h"
 
-std::random_device rd;
-std::mt19937 rgen(rd());
-//std::mt19937 rgen(1234567890);
+//std::random_device rd;
+//std::mt19937 rgen(rd());
+std::mt19937 rgen(1234567890);
 
 using namespace mhe;
 
@@ -78,7 +79,7 @@ int main() {
 //    }
 
 //    std::vector<int> S = {7, 3, 2, 1, 5, 4, 8};
-        problem_t problem = generateProblem(100, 1, 100, rgen);
+        problem_t problem = generateProblem(50, 1, 50, rgen);
 //    std::vector<int> S;
 //    for (int i = 0; i < 3; ++i) {
 //        for (int j = 0; j < problem.at(i).size(); j++){
@@ -92,14 +93,17 @@ int main() {
 
     solution_t solution = solution_t::forProblem(problem);
     solution_t solution2 = solution_t::forProblem(problem);
-    cout << "solution 1: \n" << solution << endl;
-    cout << "solution 2: \n" << solution2 << endl;
-    solution_t randomHillClimbSolution = randomHillClimb(solution, 100, rgen);
+    cout << "solution start: \n" << solution << endl;
+
+    solution_t randomHillClimbSolution = randomHillClimb(solution, 5040, rgen);
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-    solution_t deterministicHillClimbSolution = deterministicHillClimb(solution, 100);
+    solution_t deterministicHillClimbSolution = deterministicHillClimb(solution, 5040);
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    solution_t tabuSearchSolution = tabuSearch(solution, 5040, 15);
 
     cout << "solution random: \n" << randomHillClimbSolution << endl;
     cout << "solution deterministic: \n" << deterministicHillClimbSolution << endl;
+    cout << "solution tabu: \n" << tabuSearchSolution << endl;
 
 //    cout << solution.goal_sum;
 //    solution.goal_sum = 5;

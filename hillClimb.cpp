@@ -14,18 +14,24 @@ namespace mhe {
             if (newSolution.goal() <= solution.goal()) {
                 solution = newSolution;
                 std::cout << "iteration: " << i << std::endl << solution;
+                if (solution.goal() == 0) {
+                    return solution;
+                }
             }
         }
         return solution;
     }
 
-    solution_t deterministicHillClimb(solution_t solution, int numOfIterations){
+    solution_t deterministicHillClimb(solution_t solution, int numOfIterations) {
         for (int i = 0; i < numOfIterations; i++) {
             auto newSolution = solution.bestNeighbour();
 
             if (newSolution.goal() <= solution.goal()) {
                 solution = newSolution;
                 std::cout << "iteration: " << i << std::endl << solution;
+                if (solution.goal() == 0) {
+                    return solution;
+                }
             }
         }
         return solution;
