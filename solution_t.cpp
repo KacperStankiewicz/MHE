@@ -87,11 +87,12 @@ namespace mhe {
 
     std::ostream &operator<<(std::ostream &o, const mhe::solution_t s) {
         for (int i = 0; i < 3; i++) {
-            o << "S" << i + 1 << "= { ";
-            for (auto e: s[i]) {
-                o << e << " ";
-            }
-            o << "}" << std::endl;
+            o << "S" << i + 1 << s[i];
+//            "= { ";
+//            for (auto e: s[i]) {
+//                o << e << " ";
+//            }
+//            o << "}" << std::endl;
         }
         o << "goal = " << s.goal() << std::endl << "--------------------------------------------" << std::endl;
 

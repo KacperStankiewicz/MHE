@@ -4,10 +4,11 @@
 #include "solution_t.h"
 #include "hillClimb.h"
 #include "tabuSearch.h"
+#include "simulatedAnnealing.h"
 
-//std::random_device rd;
-//std::mt19937 rgen(rd());
-std::mt19937 rgen(1234567890);
+std::random_device rd;
+std::mt19937 rgen(rd());
+//std::mt19937 rgen(1234567890);
 
 using namespace mhe;
 
@@ -99,11 +100,14 @@ int main() {
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
     solution_t deterministicHillClimbSolution = deterministicHillClimb(solution, 5040);
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-    solution_t tabuSearchSolution = tabuSearch(solution, 5040, 15);
+    solution_t tabuSearchSolution = tabuSearch(solution, 5040, 0);
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    solution_t simAnnealingSolution = simulatedAnnealing(solution, [](int k){return 1000.0/k;}, 5040, rgen);
 
     cout << "solution random: \n" << randomHillClimbSolution << endl;
     cout << "solution deterministic: \n" << deterministicHillClimbSolution << endl;
     cout << "solution tabu: \n" << tabuSearchSolution << endl;
+    cout << "solution annealing: \n" << simAnnealingSolution << endl;
 
 //    cout << solution.goal_sum;
 //    solution.goal_sum = 5;

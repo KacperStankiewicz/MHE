@@ -7,10 +7,10 @@
 namespace mhe {
 
     std::ostream &operator<<(std::ostream &o, const std::vector<int> v) {
-        o << "{ ";
+        o << " { ";
         for (auto e: v)
             o << e << " ";
-        o << "}";
+        o << "}" << std::endl;
         return o;
     }
 

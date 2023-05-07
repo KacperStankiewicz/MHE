@@ -8,7 +8,7 @@
 #include "solution_t.h"
 
 namespace mhe {
-    solution_t tabuSearch(solution_t solution, int numOfIterations, int tabuSize);
+    solution_t tabuSearch(const solution_t& solution, int numOfIterations, int tabuSize);
 
 } // mhe
 
