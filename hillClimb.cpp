@@ -13,7 +13,7 @@ namespace mhe {
 
             if (newSolution.goal() <= solution.goal()) {
                 solution = newSolution;
-                std::cout << "iteration: " << i << std::endl << solution;
+                std::cout << "RANDOM HILLCLIMB\n" << "iteration: " << i << std::endl << solution;
                 if (solution.goal() == 0) {
                     return solution;
                 }
@@ -28,7 +28,7 @@ namespace mhe {
 
             if (newSolution.goal() <= solution.goal()) {
                 solution = newSolution;
-                std::cout << "iteration: " << i << std::endl << solution;
+                std::cout << "DETERMINISTIC HILLCLIMB\n" << "iteration: " << i << std::endl << solution;
                 if (solution.goal() == 0) {
                     return solution;
                 }

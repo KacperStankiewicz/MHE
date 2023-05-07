@@ -8,7 +8,7 @@
 #include "tabuSearch.h"
 
 namespace mhe {
-    solution_t tabuSearch(solution_t solution, int numOfIterations, int tabuSize) {
+    solution_t tabuSearch(const solution_t &solution, int numOfIterations, int tabuSize) {
         std::set<solution_t> tabuSet;
         std::list<solution_t> previousSolutions;
 
@@ -44,7 +44,7 @@ namespace mhe {
 
             if (nextSolution.goal() <= globalBest.goal()) {
                 globalBest = nextSolution;
-                std::cout << "iteration: " << i << std::endl << globalBest;
+                std::cout << "TABU SEARCH\n" << "iteration: " << i << std::endl << globalBest;
 
                 if (globalBest.goal() == 0) {
                     return globalBest;
