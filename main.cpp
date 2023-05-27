@@ -5,6 +5,8 @@
 #include "hillClimb.h"
 #include "tabuSearch.h"
 #include "simulatedAnnealing.h"
+#include "threePartitionProblemGaConfig.h"
+#include "geneticAlgorithm.h"
 
 std::random_device rd;
 std::mt19937 rgen(rd());
@@ -103,11 +105,15 @@ int main() {
     solution_t tabuSearchSolution = tabuSearch(solution, 5040, 0);
     cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
     solution_t simAnnealingSolution = simulatedAnnealing(solution, [](int k){return 1000.0/k;}, 5040, rgen);
+    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    threePartitionProblemGaConfig config(5040, 10, 0.9, problem);
+    solution_t geneticAlgorithm = mhe::geneticAlgorithm(config, rgen);
 
     cout << "solution random: \n" << randomHillClimbSolution << endl;
     cout << "solution deterministic: \n" << deterministicHillClimbSolution << endl;
     cout << "solution tabu: \n" << tabuSearchSolution << endl;
     cout << "solution annealing: \n" << simAnnealingSolution << endl;
+    cout << "solution GA: \n" << geneticAlgorithm << endl;
 
 //    cout << solution.goal_sum;
 //    solution.goal_sum = 5;

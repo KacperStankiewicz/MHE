@@ -6,8 +6,6 @@
 
 namespace mhe {
 
-    //todo: *for new problem type* maybe this could be adjusted to return only doable problems?
-
     mhe::problem_t generateProblem(int length, int min, int max, std::mt19937 &rgen) {
         using namespace std;
         uniform_int_distribution<int> distr(min, max);
