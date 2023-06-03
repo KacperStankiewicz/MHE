@@ -5,9 +5,9 @@
 #ifndef PROJEKT_HILLCLIMB_H
 #define PROJEKT_HILLCLIMB_H
 
-#include "solution_t.h"
+#include "../solution/solution_t.h"
 #include "random"
-#include "utils.h"
+#include "../utils/utils.h"
 
 namespace mhe {
 

@@ -5,7 +5,7 @@
 #ifndef PROJEKT_THREEPARTITIONPROBLEMGACONFIG_H
 #define PROJEKT_THREEPARTITIONPROBLEMGACONFIG_H
 
-#include "solution_t.h"
+#include "../solution/solution_t.h"
 
 namespace mhe {
 

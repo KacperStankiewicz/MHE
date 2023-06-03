@@ -6,7 +6,7 @@
 #define PROJEKT_GENETICALGORITHM_H
 
 #include "threePartitionProblemGaConfig.h"
-#include "solution_t.h"
+#include "../solution/solution_t.h"
 
 namespace mhe {
     solution_t geneticAlgorithm(threePartitionProblemGaConfig &config, std::mt19937 &rgen);

@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
-#include "solution_t.h"
-#include "hillClimb.h"
-#include "tabuSearch.h"
-#include "simulatedAnnealing.h"
-#include "threePartitionProblemGaConfig.h"
-#include "geneticAlgorithm.h"
+#include "solution/solution_t.h"
+#include "hillclimb/hillClimb.h"
+#include "tabu/tabuSearch.h"
+#include "simulatedannealing/simulatedAnnealing.h"
+#include "geneticalgorithm/threePartitionProblemGaConfig.h"
+#include "geneticalgorithm/geneticAlgorithm.h"
 
 std::random_device rd;
 std::mt19937 rgen(rd());

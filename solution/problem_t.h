@@ -8,7 +8,7 @@
 #include <array>
 #include <vector>
 #include <random>
-#include "utils.h"
+#include "../utils/utils.h"
 
 namespace mhe {
     using problem_t = std::array<std::vector<int>, 3>;

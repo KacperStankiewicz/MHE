@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <memory>
-#include "utils.h"
+#include "../utils/utils.h"
 #include "problem_t.h"
 
 namespace mhe {

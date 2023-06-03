@@ -7,7 +7,7 @@
 
 #include <random>
 #include <functional>
-#include "solution_t.h"
+#include "../solution/solution_t.h"
 
 namespace mhe {
 
