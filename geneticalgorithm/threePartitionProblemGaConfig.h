@@ -11,13 +11,28 @@ namespace mhe {
 
     class threePartitionProblemGaConfig {
     public:
+        std::string crossoverMethod;
+        std::string mutationMethod;
+        std::string selectionMethod;
+        std::string endCondition;
         int populationSize;
         int iteration;
         int maxIterations;
         double targetQuality;
         problem_t problem;
 
-        threePartitionProblemGaConfig(int maxIter, int popSize, double quality, problem_t problem_) {
+        threePartitionProblemGaConfig(std::string crossMethod,
+                                      std::string mutMethod,
+                                      std::string selMethod,
+                                      std::string endCon,
+                                      int maxIter,
+                                      int popSize,
+                                      double quality,
+                                      problem_t problem_) {
+            crossoverMethod = crossMethod;
+            mutationMethod = mutMethod;
+            selectionMethod = selMethod;
+            endCondition = endCon;
             maxIterations = maxIter;
             iteration = 0;
             populationSize = popSize;

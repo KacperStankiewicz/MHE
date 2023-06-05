@@ -13,9 +13,10 @@ namespace mhe {
 
     std::vector<solution_t> leastElementsMutation(std::vector<solution_t> population, std::mt19937 &rgen);
 
-    std::vector<solution_t> mutation(std::vector<solution_t> population, std::mt19937 &rgen);
+    std::vector<solution_t> randomMutation(std::vector<solution_t> population, std::mt19937 &rgen);
 
-    std::vector<solution_t> crossover(std::vector<solution_t> population, std::mt19937 &rgen);
+    std::vector<solution_t>
+    crossover(std::vector<solution_t> population, threePartitionProblemGaConfig &config, std::mt19937 &rgen);
 
     std::pair<solution_t, solution_t> onePointCrossover(solution_t a, solution_t b, std::mt19937 &rgen);
 
@@ -23,6 +24,12 @@ namespace mhe {
 
     std::vector<solution_t>
     rouletteWheelSelection(std::vector<double> fitnesses, std::vector<solution_t> population, std::mt19937 &rgen);
+
+    bool isEndConditionMet(threePartitionProblemGaConfig &config, std::vector<double> &fitnesses);
+
+    bool iterationEndCondition(int iteration, int maxIterations);
+
+    bool qualityEndCondition(std::vector<double> &fitnesses, long targetQuality);
 
 } //mhe
 #endif //PROJEKT_GENETICALGORITHM_H
