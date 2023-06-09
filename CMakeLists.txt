@@ -2,5 +2,6 @@ cmake_minimum_required(VERSION 3.24)
 project(projekt)
 
 set(CMAKE_CXX_STANDARD 20)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
-add_executable(projekt main.cpp solution_t.cpp solution_t.h hillClimb.cpp hillClimb.h utils.cpp utils.h problem_t.cpp problem_t.h tabuSearch.cpp tabuSearch.h simulatedAnnealing.cpp simulatedAnnealing.h geneticAlgorithm.cpp threePartitionProblemGaConfig.h geneticAlgorithm.h)
+add_executable(projekt main.cpp solution/solution_t.cpp solution/solution_t.h hillclimb/hillClimb.cpp hillclimb/hillClimb.h utils/utils.cpp utils/utils.h solution/problem_t.cpp solution/problem_t.h tabu/tabuSearch.cpp tabu/tabuSearch.h simulatedannealing/simulatedAnnealing.cpp simulatedannealing/simulatedAnnealing.h geneticalgorithm/geneticAlgorithm.cpp geneticalgorithm/threePartitionProblemGaConfig.h geneticalgorithm/geneticAlgorithm.h utils/tp_args.hpp)

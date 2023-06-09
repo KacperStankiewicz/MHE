@@ -5,7 +5,7 @@
 #ifndef PROJEKT_TABUSEARCH_H
 #define PROJEKT_TABUSEARCH_H
 
-#include "solution_t.h"
+#include "../solution/solution_t.h"
 
 namespace mhe {
     solution_t tabuSearch(const solution_t& solution, int numOfIterations, int tabuSize);

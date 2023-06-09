@@ -8,6 +8,7 @@
 #include "tabuSearch.h"
 
 namespace mhe {
+
     solution_t tabuSearch(const solution_t &solution, int numOfIterations, int tabuSize) {
         std::set<solution_t> tabuSet;
         std::list<solution_t> previousSolutions;

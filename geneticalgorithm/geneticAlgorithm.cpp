@@ -7,22 +7,30 @@
 
 namespace mhe {
 
-    bool iterationEndCondition(threePartitionProblemGaConfig &config) {
-        config.iteration++;
-        return config.iteration <= config.maxIterations;
+    bool iterationEndCondition(int iteration, int maxIterations) {
+        return iteration <= maxIterations;
     }
 
-    bool qualityEndCondition(std::vector<long> &fitnesses, threePartitionProblemGaConfig &config) {
+    bool qualityEndCondition(std::vector<double> &fitnesses, long targetQuality) {
         if (fitnesses.empty()) {
             return true;
         }
 
         for (auto x: fitnesses) {
-            if (x >= config.targetQuality) {
+            if (x >= targetQuality) {
                 return false;
             }
         }
         return true;
+    }
+
+    bool isEndConditionMet(threePartitionProblemGaConfig &config, std::vector<double> &fitnesses) {
+        if (config.endCondition == "iterations") {
+            config.iteration++;
+            return iterationEndCondition(config.iteration, config.maxIterations);
+        } else {
+            return qualityEndCondition(fitnesses, config.targetQuality);
+        }
     }
 
     std::vector<solution_t> getInitialPopulation(threePartitionProblemGaConfig config, std::mt19937 &rgen) {
@@ -121,17 +129,25 @@ namespace mhe {
         return {a, b};
     }
 
-    std::vector<solution_t> crossover(std::vector<solution_t> population, std::mt19937 &rgen) {
+    std::vector<solution_t>
+    crossover(std::vector<solution_t> population, threePartitionProblemGaConfig &config, std::mt19937 &rgen) {
         std::vector<solution_t> offspring;
         for (int i = 0; i < population.size(); i += 2) {
-            auto [a, b] = uniformCrossover(population.at(i), population.at(i + 1), rgen);
-            offspring.push_back(a);
-            offspring.push_back(b);
+            std::pair<solution_t, solution_t> ab;
+
+            if (config.crossoverMethod == "uniform") {
+                ab = uniformCrossover(population.at(i), population.at(i + 1), rgen);
+            } else {
+                ab = onePointCrossover(population.at(i), population.at(i + 1), rgen);
+            }
+
+            offspring.push_back(ab.first);
+            offspring.push_back(ab.second);
         }
         return offspring;
     }
 
-    std::vector<solution_t> mutation(std::vector<solution_t> population, std::mt19937 &rgen) {
+    std::vector<solution_t> randomMutation(std::vector<solution_t> population, std::mt19937 &rgen) {
         std::vector<solution_t> mutatedPopulation;
         for (auto solution: population) {
             std::bernoulli_distribution bernoulliDistr(0.01);
@@ -177,9 +193,11 @@ namespace mhe {
 
     solution_t geneticAlgorithm(threePartitionProblemGaConfig &config, std::mt19937 &rgen) {
         auto population = getInitialPopulation(config, rgen);
+        std::vector<double> fitnesses;
 
-        while (iterationEndCondition(config)) {
-            std::vector<double> fitnesses;
+        while (isEndConditionMet(config, fitnesses)) {
+
+#pragma omp parallel for schedule(dynamic, 1)
             for (auto i: population) {
                 fitnesses.push_back(fitness(i));
             }
@@ -190,10 +208,23 @@ namespace mhe {
                     std::cout << e << " ";
                 }
             }
-            auto parents = tournamentSelection(fitnesses, population, rgen);
-            auto offspring = crossover(parents, rgen);
-            offspring = mutation(offspring, rgen);
+
+            std::vector<solution_t> parents;
+            if (config.selectionMethod == "tournament") {
+                parents = tournamentSelection(fitnesses, population, rgen);
+            } else {
+                parents = rouletteWheelSelection(fitnesses, population, rgen);
+            }
+
+            auto offspring = crossover(parents, config, rgen);
+
+            if (config.mutationMethod == "random") {
+                offspring = randomMutation(offspring, rgen);
+            } else {
+                offspring = leastElementsMutation(offspring, rgen);
+            }
             population = offspring;
+            fitnesses.clear();
         }
         return *std::max_element(population.begin(), population.end(),
                                  [&](auto l, auto r) { return fitness(l) > fitness(r); });
