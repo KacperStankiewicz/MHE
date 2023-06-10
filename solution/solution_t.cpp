@@ -60,10 +60,17 @@ namespace mhe {
     std::vector<solution_t> solution_t::findNeighbours() const {
         solution_t currentSolution = *this;
         std::vector<solution_t> neighbours;
-        for (int i = 0; i < currentSolution.size(); i++) { // size = 3
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < currentSolution[i].size(); j++) { // size of subset
                 solution_t neighbour = currentSolution;
+
                 neighbour[(i + 1) % 3].push_back(neighbour[i][j]);
+                neighbour[i].erase(neighbour[i].begin() + j);
+                neighbours.push_back(neighbour);
+
+                neighbour = currentSolution;
+
+                neighbour[(i + 2) % 3].push_back(neighbour[i][j]);
                 neighbour[i].erase(neighbour[i].begin() + j);
                 neighbours.push_back(neighbour);
             }
@@ -88,11 +95,6 @@ namespace mhe {
     std::ostream &operator<<(std::ostream &o, const mhe::solution_t s) {
         for (int i = 0; i < 3; i++) {
             o << "S" << i + 1 << s[i];
-//            "= { ";
-//            for (auto e: s[i]) {
-//                o << e << " ";
-//            }
-//            o << "}" << std::endl;
         }
         o << "goal = " << s.goal() << std::endl << "--------------------------------------------" << std::endl;
 

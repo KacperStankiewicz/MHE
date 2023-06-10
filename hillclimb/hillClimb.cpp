@@ -7,6 +7,7 @@
 #include "random"
 
 namespace mhe {
+
     solution_t randomHillClimb(solution_t solution, int numOfIterations, std::mt19937 &rgen) {
         for (int i = 0; i < numOfIterations; i++) {
             auto newSolution = solution.randomModify(rgen);

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstring>
+#include <filesystem>
 
 std::random_device rd;
 std::mt19937 rgen(rd());
@@ -26,7 +27,7 @@ int main(int argc, char **argv) {
     auto method = arg(argc,
                       argv,
                       "alg",
-                      std::string("hillClimbRandom"),
+                      string("hillClimbRandom"),
                       "Available algorithms: (default: hillClimbRandom)\n"
                       "\t\t\t1. hillClimbRandom \n"
                       "\t\t\t2. hillClimbDeter \n"
@@ -43,7 +44,7 @@ int main(int argc, char **argv) {
     auto saTemperatureFunction = arg(argc,
                                      argv,
                                      "saTempFun ",
-                                     std::string("n/k"),
+                                     string("n/k"),
                                      "Available temperature functions for Simulated Annealing Algorithm: (k - iteration number) (default: n/k) \n"
                                      "\t\t\t1. n/k \n"
                                      "\t\t\t2. n/log k");
@@ -57,7 +58,7 @@ int main(int argc, char **argv) {
     auto crossoverMethod = arg(argc,
                                argv,
                                "crossover ",
-                               std::string("uniform"),
+                               string("uniform"),
                                "Available crossover methods: (default: uniform)\n"
                                "\t\t\t1. uniform \n"
                                "\t\t\t2. onePoint");
@@ -65,7 +66,7 @@ int main(int argc, char **argv) {
     auto mutationMethod = arg(argc,
                               argv,
                               "mutationMethod",
-                              std::string("random"),
+                              string("random"),
                               "Available mutationMethod methods: (default: random)\n"
                               "\t\t\t1. random \n"
                               "\t\t\t2. leastElements");
@@ -73,7 +74,7 @@ int main(int argc, char **argv) {
     auto endCondition = arg(argc,
                             argv,
                             "end",
-                            std::string("iterations"),
+                            string("iterations"),
                             "Available end conditions for GA: (default: iterations)\n"
                             "\t\t\t1. iterations\n "
                             "\t\t\t2. quality");
@@ -93,7 +94,7 @@ int main(int argc, char **argv) {
     auto selectionMethod = arg(argc,
                                argv,
                                "selection",
-                               std::string("tournament"),
+                               string("tournament"),
                                "Available end conditions: (default: tournament)\n"
                                "\t\t\t1. tournament \n"
                                "\t\t\t2. roulette ");
@@ -107,7 +108,7 @@ int main(int argc, char **argv) {
     auto problemSource = arg(argc,
                              argv,
                              "psource",
-                             std::string("generator"),
+                             string("generator"),
                              "Available problem sources: (default: generator)\n"
                              "\t\t\t1. generator \n"
                              "\t\t\t2. file ");
@@ -133,7 +134,7 @@ int main(int argc, char **argv) {
     auto problemSourceFile = arg(argc,
                                  argv,
                                  "pfile",
-                                 "data.txt",
+                                 string("data.txt"),
                                  "Problem source filename (default: data.txt)");
 
     auto help = arg(argc,
@@ -143,8 +144,8 @@ int main(int argc, char **argv) {
                     "Display available arguments");
 
     if (help) {
-        std::cout << "\nHELP SCREEN\n" << std::endl;
-        args_info(std::cout);
+        cout << "\nHELP SCREEN\n" << endl;
+        args_info(cout);
         return 0;
     }
 
@@ -158,18 +159,22 @@ int main(int argc, char **argv) {
 
     problem_t problem;
     solution_t solution;
+    const string MAIN_PATH = R"(D:\Studia\MHE\projekt\)";
 
     if (problemSource == "generator") {
         problem = generateProblem(problemLength, problemMinValue, problemMaxValue, rgen);
     } else {
         ifstream file;
-        file.open(string(R"(D:\Studia\MHE\projekt\)") + problemSourceFile);
-        if (file.is_open()) {
-            std::string line;
+        file.open(MAIN_PATH + problemSourceFile);
+        if (file.is_open() &&
+            !filesystem::is_empty(MAIN_PATH + problemSourceFile) &&
+            filesystem::file_size(MAIN_PATH + problemSourceFile) > 6) {
+
+            string line;
             int vectorIndex = 0;
 
-            while (std::getline(file, line)) {
-                std::istringstream iss(line);
+            while (getline(file, line)) {
+                istringstream iss(line);
                 int value;
 
                 while (iss >> value) {
@@ -180,8 +185,9 @@ int main(int argc, char **argv) {
             }
 
             file.close();
+
         } else {
-            cout << "File with given name not found... Using generated problem";
+            cout << "File with given name not found or file is empty... Using generated problem";
             problem = generateProblem(problemLength, problemMinValue, problemMaxValue, rgen);
         }
     }
@@ -228,40 +234,6 @@ int main(int argc, char **argv) {
             cout << "Genetic algorithm solution: \n" << solution << endl;
             break;
     }
-
-
-//    problem_t problem = generateProblem(50, 1, 50, rgen);
-//    solution_t solution = solution_t::forProblem(problem);
-//    cout << "solution start: \n" << solution << endl;
-//
-//    solution_t randomHillClimbSolution = randomHillClimb(solution, 5040, rgen);
-//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-//    solution_t deterministicHillClimbSolution = deterministicHillClimb(solution, 5040);
-//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-//    solution_t tabuSearchSolution = tabuSearch(solution, 5040, 0);
-//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-//    solution_t simAnnealingSolution = simulatedAnnealing(solution, [](int k){return 1000.0/k;}, 5040, rgen);
-//    cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
-//
-//    threePartitionProblemGaConfig config(5040, 10, 0.9, problem);
-//    solution_t geneticAlgorithm = mhe::geneticAlgorithm(config, rgen);
-
-
-
-//    cout << "solution random: \n" << randomHillClimbSolution << endl;
-//    cout << "solution deterministic: \n" << deterministicHillClimbSolution << endl;
-//    cout << "solution tabu: \n" << tabuSearchSolution << endl;
-//    cout << "solution annealing: \n" << simAnnealingSolution << endl;
-//    cout << "solution GA: \n" << geneticAlgorithm << endl;
-
-//    cout << solution.goal_sum;
-//    solution.goal_sum = 5;
-//    solution.problem->at(0) = {2, 3};
-//    solution.problem->at(1) = {4, 1};
-//    solution.problem->at(2) = {5, -15};
-//    std::cout << solution << std::endl;
-
-//    partition(vector<int>{1,2,3,4,5});
 
     return 0;
 }

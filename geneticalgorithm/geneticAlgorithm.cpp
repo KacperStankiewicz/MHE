@@ -76,7 +76,7 @@ namespace mhe {
             double rouletteSpin = dist(rgen);
             double partialSum = 0.0;
 
-            for (size_t i = 0; i < population.size(); i++) {
+            for (int i = 0; i < population.size(); i++) {
                 partialSum += fitnesses[i];
                 if (partialSum >= rouletteSpin) {
                     selectedPopulation.push_back(population[i]);

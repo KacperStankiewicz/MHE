@@ -18,8 +18,9 @@ namespace mhe {
     }
 
     void adjustVectorToBeDivisibleBy3(problem_t &problem) {
-        int sum = std::accumulate(problem.begin(), problem.end(), 0, [](auto l, auto r) {
-            return std::accumulate(r.begin(), r.end(), l);
+        using namespace std;
+        int sum = accumulate(problem.begin(), problem.end(), 0, [](auto l, auto r) {
+            return accumulate(r.begin(), r.end(), l);
         });
 
         int remainder = sum % 3;
