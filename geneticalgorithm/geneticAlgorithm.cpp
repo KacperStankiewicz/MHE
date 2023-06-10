@@ -223,9 +223,11 @@ namespace mhe {
             } else {
                 offspring = leastElementsMutation(offspring, rgen);
             }
+
             population = offspring;
             fitnesses.clear();
         }
+
         return *std::max_element(population.begin(), population.end(),
                                  [&](auto l, auto r) { return fitness(l) > fitness(r); });
     }

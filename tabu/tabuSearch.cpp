@@ -50,7 +50,6 @@ namespace mhe {
                 if (globalBest.goal() == 0) {
                     return globalBest;
                 }
-
             }
 
             tabuSet.insert(nextSolution);

@@ -1,7 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <numeric>
-#include <ctime>
 #include "utils/tp_args.hpp"
 #include "solution/solution_t.h"
 #include "hillclimb/hillClimb.h"
@@ -10,8 +7,6 @@
 #include "geneticalgorithm/threePartitionProblemGaConfig.h"
 #include "geneticalgorithm/geneticAlgorithm.h"
 #include <fstream>
-#include <sstream>
-#include <cstring>
 #include <filesystem>
 
 std::random_device rd;
