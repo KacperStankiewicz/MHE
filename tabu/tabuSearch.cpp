@@ -54,7 +54,14 @@ namespace mhe {
 
             tabuSet.insert(nextSolution);
             if (tabuSet.size() > tabuSize && tabuSize > 0) { // unlimited tabu when tabuSize = 0
-                tabuSet.erase(tabuSet.begin());
+                if (previousSolutions.size() < tabuSize) {
+                    tabuSet.erase(*previousSolutions.begin());
+                } else {
+                    auto iterator = previousSolutions.end();
+                    std::advance(iterator, -tabuSize);
+                    auto solutionToErase = *iterator;
+                    tabuSet.erase(solutionToErase);
+                }
             }
 
             previousSolutions.push_back(nextSolution);

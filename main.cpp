@@ -154,16 +154,15 @@ int main(int argc, char **argv) {
 
     problem_t problem;
     solution_t solution;
-    const string MAIN_PATH = R"(D:\Studia\MHE\projekt\)";
 
     if (problemSource == "generator") {
         problem = generateProblem(problemLength, problemMinValue, problemMaxValue, rgen);
     } else {
         ifstream file;
-        file.open(MAIN_PATH + problemSourceFile);
+        file.open(problemSourceFile);
         if (file.is_open() &&
-            !filesystem::is_empty(MAIN_PATH + problemSourceFile) &&
-            filesystem::file_size(MAIN_PATH + problemSourceFile) > 6) {
+            !filesystem::is_empty(problemSourceFile) &&
+            filesystem::file_size(problemSourceFile) > 6) {
 
             string line;
             int vectorIndex = 0;
